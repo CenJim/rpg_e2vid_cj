@@ -1,0 +1,28 @@
+/home/s2491540/Pythonproj/rpg_e2vid_cj/utils/event_readers.py:17: FutureWarning: The 'delim_whitespace' keyword in pd.read_csv is deprecated and will be removed in a future version. Use ``sep='\s+'`` instead
+  self.iterator = pd.read_csv(path_to_event_file, delim_whitespace=True, header=None,
+Sensor size: 240 x 180
+Loading model pretrained/E2VID_lightweight.pth.tar...
+Using TransposedConvLayer (fast, with checkerboard artefacts)
+Device: cuda:0
+== Image reconstruction == 
+Image size: 180x240
+== Event preprocessing ==
+Will normalize event tensors.
+== Image Writer ==
+Will write images to: ./results/reconstruction
+Will use 21600 events per tensor (user-specified)
+Will use fixed size event windows with 21600 events
+Output frame rate: variable
+== Timing statistics ==
+Events -> Device (voxel grid): 0.38 ms
+Voxel grid voting: 6.23 ms
+Reconstruction: 32.12 ms
+NumPy (CPU) -> Tensor (GPU): 0.06 ms
+Normalization: 0.82 ms
+Inference: 30.05 ms
+Unsharp mask: 0.23 ms
+Intensity rescaling: 0.21 ms
+Tensor (GPU) -> NumPy (CPU): 0.15 ms
+Processing entire dataset: 1.54 s
+Reading event window from file: 17.00 ms
+Building event tensor: 6.95 ms

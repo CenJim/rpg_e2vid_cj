@@ -39,10 +39,11 @@ if __name__ == "__main__":
     # Read sensor size from the first first line of the event file
     path_to_events = args.input_file
 
-    header = pd.read_csv(path_to_events, delim_whitespace=True, header=None, names=['width', 'height'],
-                         dtype={'width': np.int64, 'height': np.int64},
-                         nrows=1)
-    width, height = header.values[0]
+#    header = pd.read_csv(path_to_events, delim_whitespace=True, header=None, names=['width', 'height'],
+#                         dtype={'width': np.int64, 'height': np.int64},
+#                         nrows=1)
+#    width, height = header.values[0]
+    width, height = 240, 180
     print('Sensor size: {} x {}'.format(width, height))
 
     # Load model
