@@ -1,0 +1,3 @@
+Loading model ./pretrained/E2VID_lightweight.pth.tar...
+Using TransposedConvLayer (fast, with checkerboard artefacts)
+5
