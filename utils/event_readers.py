@@ -28,7 +28,6 @@ class FixedSizeEventReader:
             event_window = self.iterator.__next__().values
         return event_window
 
-
 class FixedDurationEventReader:
     """
     Reads events from a '.txt' or '.zip' file, and packages the events into
@@ -38,7 +37,7 @@ class FixedDurationEventReader:
               The reason is that the latter can use Pandas' very efficient cunk-based reading scheme implemented in C.
     """
 
-    def __init__(self, path_to_event_file, duration_ms=50.0, start_index=0):
+    def __init__(self, path_to_event_file, duration_ms=50.0, start_time: float=0, start_index=0):
         print('Will use fixed duration event windows of size {:.2f} ms'.format(duration_ms))
         print('Output frame rate: {:.1f} Hz'.format(1000.0 / duration_ms))
         file_extension = splitext(path_to_event_file)[1]
@@ -53,9 +52,19 @@ class FixedDurationEventReader:
         else:
             self.event_file = open(path_to_event_file, 'r')
 
-        # ignore header + the first start_index lines
-        for i in range(1 + start_index):
-            self.event_file.readline()
+        if start_index > 0:
+            # ignore header + the first start_index lines
+            for i in range(1 + start_index):
+                self.event_file.readline()
+        elif start_time > 0:
+            i = 0
+            while i < 100000:
+                line = self.event_file.readline()
+                t, x, y, pol = line.split(' ')
+                t = float(t)
+                if t > start_time:
+                    i = 0
+                    break
 
         self.last_stamp = None
         self.duration_s = duration_ms / 1000.0

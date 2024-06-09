@@ -30,6 +30,7 @@ if __name__ == "__main__":
     parser.add_argument('--skipevents', default=0, type=int)
     parser.add_argument('--suboffset', default=0, type=int)
     parser.add_argument('--compute_voxel_grid_on_cpu', dest='compute_voxel_grid_on_cpu', action='store_true')
+    parser.add_argument('--start_time', default=0, type=float)
     parser.set_defaults(compute_voxel_grid_on_cpu=False)
 
     set_inference_options(parser)
@@ -84,7 +85,8 @@ if __name__ == "__main__":
     if args.fixed_duration:
         event_window_iterator = FixedDurationEventReader(path_to_events,
                                                          duration_ms=args.window_duration,
-                                                         start_index=start_index)
+                                                         start_index=start_index,
+                                                         start_time=args.start_time)
     else:
         event_window_iterator = FixedSizeEventReader(path_to_events, num_events=N, start_index=start_index)
 
